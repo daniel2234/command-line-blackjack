@@ -30,30 +30,30 @@ deck = suits.product(cards)
 deck.shuffle!
 
 #Deal Cards
-myCards = []
-dealerCards = []
+mycards = []
+dealercards = []
 
-myCards << deck.pop
-dealerCards << deck.pop
-myCards << deck.pop
-dealerCards << deck.pop
+mycards << deck.pop
+dealercards << deck.pop
+mycards << deck.pop
+dealercards << deck.pop
 
-dealerTotal = calculate_total(dealerCards)
-myTotal = calculate_total(myCards)
+dealertotal = calculate_total(dealercards)
+mytotal = calculate_total(mycards)
 
 #show cards
 
-puts "Dealer has #{dealerCards[0]} and #{dealerCards[0]}, for a total of #{dealerTotal}"
-puts "You have: #{myCards[0]} and #{myCards[1]}, for a total of: #{myTotal}"
+puts "Dealer has #{dealercards[0]} and #{dealercards[0]}, for a total of #{dealertotal}"
+puts "You have: #{mycards[0]} and #{mycards[1]}, for a total of: #{mytotal}"
 puts ""
 
 #Player turn
-if myTotal == 21
+if mytotal == 2
   puts "Congratulations, you hit blackjack! You win!"
   exit
 end
 
-while myTotal < 21
+while mytotal < 21
   puts "What would you like to say? 1) Hit or 2) Stay"
   hit_or_stay = gets.chomp
 
@@ -69,36 +69,36 @@ while myTotal < 21
 
   new_card = deck.pop
   puts "Dealing card to player: #{new_card}"
-  myCards << new_card
-  myTotal = calculate_total(myCards)
-  puts "Your total is now: #{myTotal}"
+  mycards << new_card
+  mytotal = calculate_total(mycards)
+  puts "Your total is now: #{mytotal}"
 
-  if myTotal == 21
+  if mytotal == 21
     puts "Congratulations, you hit blackjack, You win!"
     exit
-  elsif myTotal > 21
+  elsif mytotal > 21
     puts "Sorry, it looks like you busted"
     exit
   end
 end
 
-if dealerTotal == 21
+if dealertotal == 21
     puts "Sorry, dealer hit blackjack, You lose."
     exit
 end
 
-while dealerTotal < 17
+while dealertotal < 17
     #hit
   new_card = deck.pop
   puts "Dealing new card for dealer"
-  dealerCards << new_card
-  dealerTotal = calculate_total(dealerCards)
-  puts "Dealer total is now : #{dealerTotal}"
+  dealercards << new_card
+  dealertotal = calculate_total(dealercards)
+  puts "Dealer total is now : #{dealertotal}"
 
-  if dealerTotal == 21
+  if dealertotal == 21
     puts "Sorry, dealer hit blackjack, You lose."
     exit
-  elsif dealerTotal > 21
+  elsif dealertotal > 21
     puts "Congratulations, dealer busted, You win."
     exit
   end
@@ -106,21 +106,21 @@ end
 
 # Compare hands
 puts "Dealer cards: "
-dealerCards.each do |card|
+dealercards.each do |card|
   puts "=> #{card}"
 end
 puts ""
 
 puts "Your cards:"
-myCards.each do |card|
+mycards.each do |card|
   puts "=> #{card}"
 end
 
 puts ""
 
-if dealerTotal > myTotal
+if dealertotal > mytotal
   puts "Sorry dealer won"
-elsif dealerTotal < myTotal
+elsif dealertotal < mytotal
   puts "Congratulations, you win"
 else
   puts "Its a tie."
